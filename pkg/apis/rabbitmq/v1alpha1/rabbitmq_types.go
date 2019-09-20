@@ -30,6 +30,7 @@ type RabbitmqStatus struct {
 // Rabbitmq is the Schema for the rabbitmqs API
 // +k8s:openapi-gen=true
 // +kubebuilder:subresource:status
+// +genclient
 type Rabbitmq struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
