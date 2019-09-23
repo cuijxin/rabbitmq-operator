@@ -2,6 +2,7 @@ package rabbitmq
 
 import (
 	"context"
+	"fmt"
 	"reflect"
 
 	rabbitmqv1alpha1 "github.com/cuijxin/rabbitmq-operator/pkg/apis/rabbitmq/v1alpha1"
@@ -36,6 +37,9 @@ if [ -z "$(rabbitmqctl cluster_status | grep rabbitmq-0)" ]; then
 else
   touch /notget
 fi;`
+
+const defaultImageName = "rabbitmq"
+const defaultImageTag = "3.7-rc-management"
 
 var log = logf.Log.WithName("controller_rabbitmq")
 
@@ -202,9 +206,21 @@ func newStatefulSet(cr *rabbitmqv1alpha1.Rabbitmq) *v1.StatefulSet {
 	// container with rabbitmq
 	env := make([]corev1.EnvVar, 0)
 	ports := make([]corev1.ContainerPort, 0)
+	var imageName, imageTag string
+	if cr.Spec.K8SImage.Name == "" {
+		imageName = defaultImageName
+	} else {
+		imageName = cr.Spec.K8SImage.Name
+	}
+	if cr.Spec.K8SImage.Tag == "" {
+		imageTag = defaultImageTag
+	} else {
+		imageTag = cr.Spec.K8SImage.Tag
+	}
+	image := fmt.Sprintf("%s:%s", imageName, imageTag)
 	rabbitmqContainer := corev1.Container{
 		Name:      "rabbitmq",
-		Image:     "rabbitmq:3.7-rc-management",
+		Image:     image, //"rabbitmq:3.7-rc-management",
 		Lifecycle: lifecycle,
 		Env:       newContainerEnvs(env),
 		Ports:     newContainerPorts(ports),

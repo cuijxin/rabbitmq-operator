@@ -7,12 +7,21 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
+// RabbitmqImage Sets image url and tag
+type RabbitmqImage struct {
+	Name string `json:"name"`
+	Tag  string `json:"tag"`
+}
+
 // RabbitmqSpec defines the desired state of Rabbitmq
 // +k8s:openapi-gen=true
 type RabbitmqSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
 	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
+
+	// you can set your own image instead of official
+	K8SImage RabbitmqImage `json:"image"`
 
 	RabbitmqReplicas int32 `json:"replicas"`
 }

@@ -4,3 +4,6 @@ metadata:
   name: example-rabbitmq
 spec:
   replicas: 3
+  image:
+    name: rabbitmq
+    tag: 3.7-rc-management
