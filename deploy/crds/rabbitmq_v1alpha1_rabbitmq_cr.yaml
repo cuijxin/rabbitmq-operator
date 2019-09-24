@@ -7,3 +7,4 @@ spec:
   image:
     name: rabbitmq
     tag: 3.7-rc-management
+    

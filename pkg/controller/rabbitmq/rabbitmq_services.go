@@ -99,7 +99,7 @@ func (r *ReconcileRabbitmq) reconcileManagementService(reqLogger logr.Logger, cr
 			Labels:    returnLabels(cr),
 		},
 		Spec: corev1.ServiceSpec{
-			Type:     corev1.ServiceTypeNodePort,
+			Type:     getServiceType(cr.Spec.ServiceType),
 			Selector: returnLabels(cr),
 			Ports: []corev1.ServicePort{
 				{
@@ -113,4 +113,17 @@ func (r *ReconcileRabbitmq) reconcileManagementService(reqLogger logr.Logger, cr
 	reconcileResult, err := r.reconcileService(reqLogger, cr, service)
 
 	return reconcileResult, err
+}
+
+func getServiceType(serviceType string) corev1.ServiceType {
+	var result corev1.ServiceType
+	switch serviceType {
+	case "NodePort":
+		result = corev1.ServiceTypeNodePort
+	case "LoadBalancer":
+		result = corev1.ServiceTypeLoadBalancer
+	default:
+		result = corev1.ServiceTypeNodePort
+	}
+	return result
 }

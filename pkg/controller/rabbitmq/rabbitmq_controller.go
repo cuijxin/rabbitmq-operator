@@ -206,18 +206,7 @@ func newStatefulSet(cr *rabbitmqv1alpha1.Rabbitmq) *v1.StatefulSet {
 	// container with rabbitmq
 	env := make([]corev1.EnvVar, 0)
 	ports := make([]corev1.ContainerPort, 0)
-	var imageName, imageTag string
-	if cr.Spec.K8SImage.Name == "" {
-		imageName = defaultImageName
-	} else {
-		imageName = cr.Spec.K8SImage.Name
-	}
-	if cr.Spec.K8SImage.Tag == "" {
-		imageTag = defaultImageTag
-	} else {
-		imageTag = cr.Spec.K8SImage.Tag
-	}
-	image := fmt.Sprintf("%s:%s", imageName, imageTag)
+	image := fmt.Sprintf("%s:%s", cr.Spec.K8SImage.Name, cr.Spec.K8SImage.Tag)
 	rabbitmqContainer := corev1.Container{
 		Name:      "rabbitmq",
 		Image:     image, //"rabbitmq:3.7-rc-management",

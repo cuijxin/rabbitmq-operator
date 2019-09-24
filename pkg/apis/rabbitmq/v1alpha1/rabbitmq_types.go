@@ -24,6 +24,8 @@ type RabbitmqSpec struct {
 	K8SImage RabbitmqImage `json:"image"`
 
 	RabbitmqReplicas int32 `json:"replicas"`
+
+	ServiceType string `json:"type"`
 }
 
 // RabbitmqStatus defines the observed state of Rabbitmq
