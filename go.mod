@@ -24,6 +24,7 @@ replace (
 )
 
 replace (
+	github.com/operator-framework/operator-sdk => github.com/operator-framework/operator-sdk v0.10.0
 	//github.com/coreos/prometheus-operator => github.com/coreos/prometheus-operator v0.29.0
 	// Pinned to v2.9.2 (kubernetes-1.13.1) so https://proxy.golang.org can
 	// resolve it correctly.
@@ -32,7 +33,5 @@ replace (
 	sigs.k8s.io/controller-runtime => sigs.k8s.io/controller-runtime v0.1.12
 	sigs.k8s.io/controller-tools => sigs.k8s.io/controller-tools v0.1.11-0.20190411181648-9d55346c2bde
 )
-
-replace github.com/operator-framework/operator-sdk => github.com/operator-framework/operator-sdk v0.10.0
 
 go 1.13
