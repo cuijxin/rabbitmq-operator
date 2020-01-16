@@ -92,6 +92,7 @@ func (r *ReconcileRabbitmq) reconcileDiscoveryService(reqLogger logr.Logger, cr 
 }
 
 func (r *ReconcileRabbitmq) reconcileManagementService(reqLogger logr.Logger, cr *rabbitmqv1alpha1.Rabbitmq) (reconcile.Result, error) {
+	reqLogger.Info("Custom rabbitmq cluster service type is ", "service.type:", cr.Spec.ServiceType)
 	service := &corev1.Service{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      cr.Name + "-management",
