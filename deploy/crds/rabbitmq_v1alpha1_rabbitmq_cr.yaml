@@ -1,0 +1,10 @@
+apiVersion: rabbitmq.xintelligent.com/v1alpha1
+kind: Rabbitmq
+metadata:
+  name: example-rabbitmq
+spec:
+  replicas: 3
+  image:
+    name: rabbitmq
+    tag: 3.7-rc-management
+    
